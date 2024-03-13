@@ -1,0 +1,53 @@
+---
+neptune:
+  enable: False
+  api_key: ~
+  run_name: ~
+datasets:
+  - dataset: "data_example/loan_data_set.csv"
+    freeze_feature: [] # Features to freeze (but you can leave it)
+    sens_feats: "selection"  
+    batch_size: 256 # Batch size to use for training
+evaluations:
+  - classifiers:  # Classifiers to use for evaluation
+      - clf_1:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+    adversaries:  # Adversaries to use for evaluation
+      - adv_1:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: True # Restricht predictions of the adversary to seen mappings (instead of the full preimage)
+      - adv_2:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: False  
+minimizers: # Minimizers to evaluate
+  - minimizer: "tree"
+    tree_max_leaf_nodes: [50]
+    tree_min_sample_leaf: 100
+    tree_alpha: [0.6]
+  # - minimizer: "featsel"
+  #   featsel_k: [2, 4, 8, 10, 20, "all"]
+  # - minimizer: "advtrain"
+  #   advtrain_max_buckets: 5
+  #   advtrain_n_epochs: 20
+  #   advtrain_inner_steps: 1
+  #   advtrain_weight: [0, 0.01, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 0.95]
+  # - minimizer: "mi"
+  #   mi_max_buckets: 5
+  #   mi_n_epochs: 20
+  #   mi_weight: [0, 0.001, 0.005, 0.01, 0.1, 0.2, 0.5, 0.7, 1]
+  # - minimizer: "uniform"
+  #   uniform_buckets: [1, 2, 3, 4, 5]
+seed: 123
+device: "cpu"
+num_workers: 1
+logger_level: "INFO"
+out_dir: "results/selection"

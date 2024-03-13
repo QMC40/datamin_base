@@ -1,0 +1,36 @@
+---
+neptune:
+  enable: False
+  api_key: ~
+  run_name: ~
+datasets:
+  - dataset: ["ACSIncome", "ACSEmployment"]
+    acs_state: "CA"
+    acs_year: 2014
+    add_syn: False
+    freeze_feature: []
+    sens_feats: "all"
+    batch_size: 256
+evaluations:
+  - classifiers:
+      - clf_1:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+    adversaries:
+      - adv_1:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+minimizers:
+  - minimizer: "tree"
+    tree_max_leaf_nodes: [10, 20, 30]
+    tree_min_sample_leaf: [90, 100, 100]
+    tree_alpha: 0.3
+    connect_arg_lists: True
+seed: 123
+device: "cuda:0"
+num_workers: 8
+out_dir: "my_out"

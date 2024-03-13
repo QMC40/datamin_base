@@ -1,0 +1,51 @@
+---
+neptune:
+  enable: False
+  api_key: ~
+  run_name: ~
+datasets:
+  - dataset: "ACSIncome"
+    acs_state: "CA"
+    acs_year: 2014
+    add_syn: False
+    freeze_feature: []
+    sens_feats: "disc"
+    batch_size: 256
+    train_percent: 1.0
+    bucketization_percent: 1.0
+evaluations:
+  - classifiers:
+      - clf_1:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        clf_tune_wd: False
+    adversaries:
+      - baseline_ops:
+        adv_type: "recovery"
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: True
+      - baseline:
+        adv_type: "recovery"
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: False
+minimizers:
+  - minimizer: "tree"
+    tree_max_leaf_nodes: [20]
+    tree_min_sample_leaf: 100
+    tree_alpha: [0.1, 0.3, 0.7]
+  - minimizer: "uniform"
+    uniform_buckets: [3, 4]
+continual_release: False
+seed: 123
+device: "cpu"
+num_workers: 12
+logger_level: "INFO"
+out_dir: "ablation/mlp2/baselines"

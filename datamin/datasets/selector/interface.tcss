@@ -1,0 +1,29 @@
+Header {
+  dock: top;
+  height: 2;
+  content-align: center middle;
+  color: white;
+}
+
+#options {
+    height: 100%;
+    margin: 0 1;
+}
+
+DataTable {
+    height: 100%;
+}
+
+SelectionList {
+    height: auto;
+}
+
+ListView {
+    width: 30;
+    height: auto;
+    margin: 1;
+}
+
+Label {
+    padding: 1 2;
+}

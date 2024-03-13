@@ -1,0 +1,43 @@
+---
+neptune:
+  enable: False
+  api_key: ~
+  run_name: ~
+datasets:
+  - dataset: ["ACSIncome", "ACSPublicCoverage",]
+    acs_state: "CA"
+    acs_year: 2014
+    add_syn: False
+    freeze_feature: []
+    sens_feats: "disc"
+    batch_size: 256
+evaluations:
+  - classifiers:
+      - clf_1:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+    adversaries:
+      - adv_1:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: True
+      - adv_2:
+        clf_model: "mlp2"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: False
+minimizers:
+  - minimizer: "tree"
+    tree_max_leaf_nodes: [200, 100, 50, 2, 4, 6, 8, 10, 20]
+    tree_min_sample_leaf: 100
+    tree_alpha: [0.0, 0.1, 0.3, 0.5, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
+seed: 123
+device: "cpu"
+num_workers: 12
+logger_level: "INFO"
+out_dir: "final_results/acs_shift_base"

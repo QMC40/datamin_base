@@ -1,0 +1,57 @@
+---
+neptune:
+  enable: False
+  api_key: ~
+  run_name: ~
+datasets:
+  - dataset: ["ACSIncome"]
+    acs_state: "CA"
+    acs_year: 2014
+    add_syn: False
+    freeze_feature: []
+    sens_feats: "disc"
+    batch_size: 256
+evaluations:
+  - classifiers:
+      - clf_1:
+        clf_model: "mlp4"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        clf_tune_wd: False
+    adversaries:
+      - adv_1:
+        clf_model: "mlp4"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: True
+      - adv_2:
+        clf_model: "mlp4"
+        clf_epochs: 20
+        clf_lr: 0.01
+        clf_weight_decay: 0.0
+        only_predict_seen: False
+minimizers:
+  - minimizer: "advtrain"
+    advtrain_max_buckets: 5
+    advtrain_n_epochs: 20
+    advtrain_inner_steps: 1
+    advtrain_weight: [0, 0.01, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 0.95]
+  - minimizer: "mi"
+    mi_max_buckets: 5
+    mi_n_epochs: 20
+    mi_weight: [0, 0.001, 0.005, 0.01, 0.1, 0.2, 0.5, 0.7, 1]
+  - minimizer: "uniform"
+    uniform_buckets: [1, 2, 3, 4, 5]
+  - minimizer: "tree"
+    tree_max_leaf_nodes: [8, 10, 20] # 2, 4, 6, 50, 100, 200
+    tree_min_sample_leaf: 100
+    tree_alpha: [0.0, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9]
+  - minimizer: "featsel"
+    featsel_k: [2, 4, 8, 10, "all"]
+seed: 123
+device: "cpu"
+num_workers: 13
+logger_level: "INFO"
+out_dir: "ablation/adv_nets/acs_mlp4"
