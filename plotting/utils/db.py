@@ -21,6 +21,7 @@ def parse_files_to_db(args: argparse.Namespace):
     for root, dirs, files in os.walk(dir):
         # Get Dataset information
         for name in files:
+            print(f"working on file: {name}")
             with open(os.path.join(root, name)) as fp:
                 # Method_name is the last directory level
                 method_name = root.split("/")[-1]
@@ -221,6 +222,8 @@ def parse_files_to_db(args: argparse.Namespace):
 def get_dataset_dict_from_str(dataset: str) -> Dict[str, str]:
     dataset_ids = dataset.split("_")
     dataset_dict: Dict[str, str] = {}
+    
+    print(len(dataset_ids))
 
     if len(dataset_ids) == 9:  # Full information
         if dataset_ids[-6] in ["disc", "cont", "all"] or (

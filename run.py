@@ -1,8 +1,11 @@
+# version 2.0
+
 import multiprocessing
 import os
 import sys
 import time
 from typing import List, Optional
+from datetime import datetime
 
 import neptune.new as neptune  # type: ignore
 import numpy as np
@@ -106,6 +109,7 @@ def run(cfg: Config) -> None:
     # Init neptune
     run: Optional[neptune.Run] = None
     if cfg.neptune_config.use_neptune:
+        logger.debug("neptune")
         run = neptune.init(
             project="ethsri/data-minimization",
             api_token=cfg.neptune_config.neptune_key,
@@ -113,11 +117,13 @@ def run(cfg: Config) -> None:
         run["parameters"] = vars(cfg)
         run["label"] = cfg.neptune_config.neptune_run_label
     else:
+        logger.debug("no neptune")
         run = None
 
     # Fetch dataset
     dataset_config = cfg.dataset_config
     require_all_values_in_train = True  # For PAT we require each class to be present at least once in the training set
+    logger.debug("dataset fetched")
 
     dataset = FolktablesDataset(
         dataset_config,
@@ -139,9 +145,11 @@ def run(cfg: Config) -> None:
         logger.info("Done")
 
     # Init evaluator
+    logger.debug(f"setting up evaluator")
     evaluator = Evaluator(cfg.eval_config, run, dataset, cfg.device)
 
     # Get clf LB
+    logger.debug(f"training")
     train_lb = np.maximum(np.mean(dataset.y_train), 1 - np.mean(dataset.y_train))
     test_lb = np.maximum(np.mean(dataset.y_test), 1 - np.mean(dataset.y_test))
     logger.info(
@@ -192,7 +200,7 @@ def run(cfg: Config) -> None:
     bucketizations = get_bucketizations(cfg, dataset, logger, run)
 
     # Print
-    logger.info("Final bucketizations:")
+    logger.debug("Final bucketizations:")
     for buck in bucketizations:
         buck.print_buckets(logger=logger)
         k_anon_stats = buck._k_anonymity_stats(dataset.train_loader.dataset.tensors[0])
@@ -205,8 +213,6 @@ def run(cfg: Config) -> None:
         logger.info(
             f"k_anon={min(k_anon_stats)} , l_div={min(l_div_stats)}, size={len(k_anon_stats)}"
         )
-        # logger.info(f"k_anon stats: {k_anon_str}")
-        # logger.info(f"l_div stats: {l_div_str}")
 
     bucketization: Bucketization
     if len(bucketizations) > 1:
@@ -241,13 +247,16 @@ def run(cfg: Config) -> None:
         logger=logger,
     )
     logger.info(results)
+    print(f"Results({filename}: {results}")
     if run is not None:
         run["status"] = "done"
 
 
 ###########################
 if __name__ == "__main__":
-    print("\n\n\nCommand:", " ".join(sys.argv), "\n\n\n")
+    start_time = datetime.now()
+    print("\n\n\nCommand:", " ".join(sys.argv))
+    print(f"Run started at: {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n\n\n")
 
     configs = get_configs()
     cpu_count = configs[0].num_workers  # cpu_count()
@@ -259,3 +268,8 @@ if __name__ == "__main__":
     else:
         for cfg in configs:
             run(cfg)
+            
+    end_time = datetime.now()
+    elapsed = end_time - start_time
+    print(f"\nRun finished at: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Total elapsed time: {str(elapsed).split('.')[0]} (hh:mm:ss)")

@@ -24,17 +24,6 @@ class FolktablesDataset:
         "ACSTravelTime": [0, 1, 15],
     }
 
-    # Holds:
-    #
-    # feature_names, cont_feats, disc_feats, tot_feats, sens_feats
-    #
-    # feat_data list of big tuples
-    #
-    # original data: X/y_train_orig, X/y_val_orig, X/y_test_orig
-    # one-hot data: same but _oh
-    # loaders (with one-hot) for train, val, test
-
-    # flake8: noqa: C901
     def __init__(
         self,
         config: DatasetConfig,
@@ -204,7 +193,7 @@ class FolktablesDataset:
             preselect=all_values_in_train,
             disc_feats=disc_feats,
         )
-
+        print("Training labels distribution:", np.unique(y_train, return_counts=True))
         assert X_train.shape[1] == tot_feats, "X_train has wrong number of features"
         assert len(np.unique(y_train)) == 2, "y_train should be binary"
 
@@ -511,3 +500,4 @@ class FolktablesDataset:
     def get_stats(self) -> str:
         stats = f"Size Orig: {self.X_train_orig.shape} Size for bucketization: {self.X_train_buck_orig.shape} Size val: {self.X_val_orig.shape} Size test: {self.X_test_orig.shape}"
         return stats
+

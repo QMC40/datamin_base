@@ -58,3 +58,4 @@ def get_logger(
 
 def get_print_logger(name: str) -> CLogger:
     return CLogger(logger=None, name=name)
+

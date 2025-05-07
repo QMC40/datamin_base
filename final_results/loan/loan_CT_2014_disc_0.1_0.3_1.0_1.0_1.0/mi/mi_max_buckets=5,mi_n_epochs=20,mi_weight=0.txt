@@ -1,0 +1,260 @@
+-------------------------------------CONFIG-------------------------------------
+neptune_config:
+ neptune_run_label: None
+ use_neptune: False
+dataset_config:
+ dataset: loan
+ acs_state: CT
+ acs_year: 2014
+ shift_state: None
+ shift_year: None
+ freeze_feature: []
+ add_syn: False
+ bucketization_percent: 1.0
+ train_percent: 1.0
+ adv_percent: 1.0
+ sens_feats: disc
+ val_split: 0.1
+ test_split: 0.3
+ batch_size: 256
+eval_config:
+Classifiers:
+ Classifier 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+Adversary 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+min_config:
+mi_max_buckets=5,mi_n_epochs=20,mi_weight=0
+seed: 123
+device: cpu
+out_dir: final_results2/loan
+compute_guarantees: False
+get_clf_upper_bound: False
+fairness_sens_col: None
+num_workers: 12
+logger_level: INFO
+-----------------------------------CONFIG END-----------------------------------
+
+majority class acc (clf ACC LB): train_acc=0.688 test_acc=0.670
+feat=Gender, majority_freqs: train=0.818 test=0.795
+feat=Married, majority_freqs: train=0.655 test=0.643
+feat=Dependents, majority_freqs: train=0.587 test=0.562
+feat=Education, majority_freqs: train=0.799 test=0.719
+feat=Self_Employed, majority_freqs: train=0.848 test=0.827
+feat=Property_Area, majority_freqs: train=0.378 test=0.384
+[adv] naive majority freq guess (adv ACC LB): train_acc=0.681, test_acc=0.655
+
+Running data minimizer: mi
+new_nb_fts=55
+================
+Bucketization:
+ApplicantIncome (cont): tot_buckets=3, borders=[0.004, 0.016]
+		Train set values would map to 3 buckets: [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+CoapplicantIncome (cont): tot_buckets=4, borders=[0.031, 0.149, 0.283]
+		Train set values would map to 4 buckets: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+Loan_Amount (cont): tot_buckets=5, borders=[0.088, 0.148, 0.189, 0.291]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Loan_Amount_Term (cont): tot_buckets=3, borders=[0.662, 0.865]
+		Train set values would map to 3 buckets: [0, 0, 0, 0, 0, 0, 0, 1, 2]
+Credit_History (cont): tot_buckets=2, borders=[0.5]
+		Train set values would map to 2 buckets: [0, 1]
+Gender (disc): tot_buckets=1, mapping=[0, 0]
+Married (disc): tot_buckets=2, mapping=[0, 1]
+Dependents (disc): tot_buckets=2, mapping=[0, 0, 1, 1, 1, 0]
+Education (disc): tot_buckets=2, mapping=[0, 1]
+Self_Employed (disc): tot_buckets=1, mapping=[0, 0]
+Property_Area (disc): tot_buckets=1, mapping=[0, 0, 0]
+Used 26 buckets in total
+================
+LR:
+0.01
+LR:
+0.01
+LR:
+0.01
+LR:
+0.01
+LR:
+0.01
+==================
+================
+Bucketization:
+ApplicantIncome (cont): tot_buckets=3, borders=[0.004, 0.023]
+		Train set values would map to 3 buckets: [0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+CoapplicantIncome (cont): tot_buckets=4, borders=[0.031, 0.149, 0.305]
+		Train set values would map to 4 buckets: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+Loan_Amount (cont): tot_buckets=5, borders=[0.088, 0.143, 0.184, 0.299]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Loan_Amount_Term (cont): tot_buckets=3, borders=[0.662, 0.865]
+		Train set values would map to 3 buckets: [0, 0, 0, 0, 0, 0, 0, 1, 2]
+Credit_History (cont): tot_buckets=2, borders=[0.5]
+		Train set values would map to 2 buckets: [0, 1]
+Gender (disc): tot_buckets=1, mapping=[0, 0]
+Married (disc): tot_buckets=1, mapping=[0, 0]
+Dependents (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0]
+Education (disc): tot_buckets=2, mapping=[0, 1]
+Self_Employed (disc): tot_buckets=2, mapping=[0, 1]
+Property_Area (disc): tot_buckets=1, mapping=[0, 0, 0]
+Used 25 buckets in total
+================
+LR:
+0.001
+LR:
+0.001
+LR:
+0.001
+LR:
+0.001
+LR:
+0.001
+==================
+================
+Bucketization:
+ApplicantIncome (cont): tot_buckets=5, borders=[0.004, 0.016, 0.027, 0.049]
+		Train set values would map to 5 buckets: [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+CoapplicantIncome (cont): tot_buckets=4, borders=[0.031, 0.151, 0.305]
+		Train set values would map to 4 buckets: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+Loan_Amount (cont): tot_buckets=5, borders=[0.089, 0.145, 0.185, 0.306]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Loan_Amount_Term (cont): tot_buckets=3, borders=[0.662, 0.865]
+		Train set values would map to 3 buckets: [0, 0, 0, 0, 0, 0, 0, 1, 2]
+Credit_History (cont): tot_buckets=2, borders=[0.5]
+		Train set values would map to 2 buckets: [0, 1]
+Gender (disc): tot_buckets=1, mapping=[0, 0]
+Married (disc): tot_buckets=1, mapping=[0, 0]
+Dependents (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0]
+Education (disc): tot_buckets=2, mapping=[0, 1]
+Self_Employed (disc): tot_buckets=1, mapping=[0, 0]
+Property_Area (disc): tot_buckets=1, mapping=[0, 0, 0]
+Used 26 buckets in total
+================
+LR:
+0.0001
+LR:
+0.0001
+LR:
+0.0001
+LR:
+0.0001
+LR:
+0.0001
+==================
+================
+Bucketization:
+ApplicantIncome (cont): tot_buckets=5, borders=[0.021, 0.035, 0.046, 0.08]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+CoapplicantIncome (cont): tot_buckets=4, borders=[0.031, 0.153, 0.307]
+		Train set values would map to 4 buckets: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+Loan_Amount (cont): tot_buckets=5, borders=[0.092, 0.148, 0.189, 0.306]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Loan_Amount_Term (cont): tot_buckets=3, borders=[0.662, 0.865]
+		Train set values would map to 3 buckets: [0, 0, 0, 0, 0, 0, 0, 1, 2]
+Credit_History (cont): tot_buckets=2, borders=[0.5]
+		Train set values would map to 2 buckets: [0, 1]
+Gender (disc): tot_buckets=1, mapping=[0, 0]
+Married (disc): tot_buckets=1, mapping=[0, 0]
+Dependents (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0]
+Education (disc): tot_buckets=2, mapping=[0, 1]
+Self_Employed (disc): tot_buckets=2, mapping=[0, 1]
+Property_Area (disc): tot_buckets=1, mapping=[0, 0, 0]
+Used 27 buckets in total
+================
+LR:
+1e-05
+LR:
+1e-05
+LR:
+1e-05
+LR:
+1e-05
+LR:
+1e-05
+==================
+================
+Bucketization:
+ApplicantIncome (cont): tot_buckets=5, borders=[0.029, 0.044, 0.059, 0.109]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+CoapplicantIncome (cont): tot_buckets=4, borders=[0.031, 0.153, 0.307]
+		Train set values would map to 4 buckets: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+Loan_Amount (cont): tot_buckets=5, borders=[0.091, 0.148, 0.189, 0.312]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Loan_Amount_Term (cont): tot_buckets=3, borders=[0.662, 0.865]
+		Train set values would map to 3 buckets: [0, 0, 0, 0, 0, 0, 0, 1, 2]
+Credit_History (cont): tot_buckets=2, borders=[0.5]
+		Train set values would map to 2 buckets: [0, 1]
+Gender (disc): tot_buckets=1, mapping=[0, 0]
+Married (disc): tot_buckets=1, mapping=[0, 0]
+Dependents (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0]
+Education (disc): tot_buckets=2, mapping=[0, 1]
+Self_Employed (disc): tot_buckets=2, mapping=[0, 1]
+Property_Area (disc): tot_buckets=1, mapping=[0, 0, 0]
+Used 27 buckets in total
+================
+================
+Bucketization:
+ApplicantIncome (cont): tot_buckets=5, borders=[0.029, 0.044, 0.059, 0.109]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+CoapplicantIncome (cont): tot_buckets=4, borders=[0.031, 0.153, 0.307]
+		Train set values would map to 4 buckets: [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+Loan_Amount (cont): tot_buckets=5, borders=[0.091, 0.148, 0.189, 0.312]
+		Train set values would map to 5 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Loan_Amount_Term (cont): tot_buckets=3, borders=[0.662, 0.865]
+		Train set values would map to 3 buckets: [0, 0, 0, 0, 0, 0, 0, 1, 2]
+Credit_History (cont): tot_buckets=2, borders=[0.5]
+		Train set values would map to 2 buckets: [0, 1]
+Gender (disc): tot_buckets=1, mapping=[0, 0]
+Married (disc): tot_buckets=1, mapping=[0, 0]
+Dependents (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0]
+Education (disc): tot_buckets=2, mapping=[0, 1]
+Self_Employed (disc): tot_buckets=2, mapping=[0, 1]
+Property_Area (disc): tot_buckets=1, mapping=[0, 0, 0]
+Used 27 buckets in total
+================
+k_anon=1 , l_div=-0.0, size=196
+Final results:
+----> Evaluating: Training new classifiers and a new adversary on 1-hot buckets (27 fts) - torch.Size([368, 22]) points
+----> Evaluating: Training classifier 1
+[Trying CLF with wd=1e-06] 0.750 -> 0.869
+[Trying CLF with wd=1e-05] 0.761 -> 0.852
+[Trying CLF with wd=0.0001] 0.764 -> 0.852
+[Trying CLF with wd=0.001] 0.755 -> 0.869
+[Trying CLF with wd=0.002] 0.766 -> 0.852
+[Trying CLF with wd=0.004] 0.769 -> 0.852
+[Trying CLF with wd=0.006] 0.766 -> 0.852
+[Trying CLF with wd=0.008] 0.769 -> 0.852
+[Trying CLF with wd=0.01] 0.761 -> 0.852
+[Trying CLF with wd=0.02] 0.761 -> 0.852
+[Trying CLF with wd=0.05] 0.772 -> 0.836
+Chose 0.001
+[clf] train_acc=0.755, val_acc=0.869, test_acc=0.789
+Adversary uses torch.Size([368, 22]) points!
+[Trying ADV with wd=1e-06] 0.758 -> 0.713
+[Trying ADV with wd=1e-05] 0.758 -> 0.708
+[Trying ADV with wd=0.0001] 0.755 -> 0.713
+[Trying ADV with wd=0.001] 0.759 -> 0.708
+[Trying ADV with wd=0.002] 0.750 -> 0.721
+[Trying ADV with wd=0.004] 0.751 -> 0.716
+[Trying ADV with wd=0.006] 0.751 -> 0.713
+[Trying ADV with wd=0.008] 0.747 -> 0.719
+[Trying ADV with wd=0.01] 0.752 -> 0.719
+[Trying ADV with wd=0.02] 0.748 -> 0.719
+[Trying ADV with wd=0.05] 0.741 -> 0.721
+Chose 0.05
+[adv test] adv accuracy per feature:
+	feat=Gender: tr= 0.814, va= 0.770, te= 0.795
+	feat=Married: tr= 0.682, va= 0.656, te= 0.643
+	feat=Dependents: tr= 0.565, va= 0.525, te= 0.562
+	feat=Education: tr= 1.000, va= 1.000, te= 1.000
+	feat=Self_Employed: tr= 1.000, va= 1.000, te= 1.000
+	feat=Property_Area: tr= 0.384, va= 0.377, te= 0.384
+[adv] train_acc=0.741, val_acc=0.721, test_acc=0.731
+[ADV Quantile] 0.99: 0.667
+[ADV Quantile] 0.98: 0.667
+[ADV Quantile] 0.95: 0.798
+[ADV Quantile] 0.90: 0.778
+[ADV Quantile] 0.80: 0.757
+[ADV Quantile] 0.50: 0.764
+[ADV Quantile] 0.00: 0.731
+[ADV EXACT] train_acc=40.0/368, val_acc=1.0/61, test_acc=13.0/185
+==================
+{'clf': [(0.7554347800171893, 0.868852436542511, 0.7891891598701477)], 'adv_recovery-ops': [(0.7408389126261076, 0.7213114649057388, 0.7306306312481562)]}

@@ -23,6 +23,19 @@ evaluations:
         clf_lr: 0.01
         clf_weight_decay: 0.0
         only_predict_seen: True
+        
+
+adversaries:
+  - adv_1:
+      adv_type: "linkage"              # Specify the adversary type
+      linkage_algorithm: "mostlikely"  # Can also be: "random" or "sampling"
+      linkage_b_features: [0, 1]       # Indices of target features (adjust based on dataset)
+      linkage_a_features: [2, 3]       # Indices of auxiliary features
+      clf_model: "mlp2"
+      clf_epochs: 20
+      clf_lr: 0.01
+      clf_weight_decay: 0.0
+
 minimizers:
   - minimizer: "tree"
     tree_max_leaf_nodes: [2, 4, 6, 8, 10, 20, 50, 100, 200]
@@ -46,3 +59,4 @@ device: "cpu"
 num_workers: 12
 logger_level: "INFO"
 out_dir: "final_results/loan"
+

@@ -1,0 +1,43 @@
+-------------------------------------CONFIG-------------------------------------
+neptune_config:
+ neptune_run_label: None
+ use_neptune: False
+dataset_config:
+ dataset: crime
+ acs_state: CT
+ acs_year: 2014
+ shift_state: None
+ shift_year: None
+ freeze_feature: []
+ add_syn: False
+ bucketization_percent: 1.0
+ train_percent: 1.0
+ adv_percent: 1.0
+ sens_feats: disc
+ val_split: 0.1
+ test_split: 0.3
+ batch_size: 256
+eval_config:
+Classifiers:
+ Classifier 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+Adversary 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+min_config:
+mi_max_buckets=5,mi_n_epochs=1,mi_weight=0.5
+seed: 123
+device: cpu
+out_dir: final_results2/crime
+compute_guarantees: False
+get_clf_upper_bound: False
+fairness_sens_col: None
+num_workers: 12
+logger_level: INFO
+-----------------------------------CONFIG END-----------------------------------
+
+majority class acc (clf ACC LB): train_acc=0.509 test_acc=0.503
+feat=state, majority_freqs: train=0.131 test=0.139
+feat=PROTECTED_ATTR, majority_freqs: train=0.579 test=0.573
+[adv] naive majority freq guess (adv ACC LB): train_acc=0.355, test_acc=0.356
+
+Running data minimizer: mi

@@ -1,0 +1,91 @@
+-------------------------------------CONFIG-------------------------------------
+neptune_config:
+ neptune_run_label: None
+ use_neptune: False
+dataset_config:
+ dataset: ACSIncome
+ acs_state: CA
+ acs_year: 2014
+ shift_state: None
+ shift_year: None
+ freeze_feature: []
+ add_syn: False
+ bucketization_percent: 1.0
+ train_percent: 1.0
+ adv_percent: 1.0
+ sens_feats: disc
+ val_split: 0.1
+ test_split: 0.3
+ batch_size: 256
+eval_config:
+Classifiers:
+ Classifier 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+Adversary 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+Adversary 1:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+min_config:
+tree_max_leaf_nodes=6,tree_min_sample_leaf=100,tree_alpha=0.65,min_bucket_threshold=0.0,initial_split_factor=1.0
+seed: 123
+device: cpu
+out_dir: final_results/acs
+compute_guarantees: False
+get_clf_upper_bound: False
+fairness_sens_col: None
+num_workers: 12
+logger_level: INFO
+-----------------------------------CONFIG END-----------------------------------
+
+majority class acc (clf ACC LB): train_acc=0.643 test_acc=0.651
+feat=COW, majority_freqs: train=0.653 test=0.652
+feat=MAR, majority_freqs: train=0.534 test=0.536
+feat=OCCP, majority_freqs: train=0.032 test=0.030
+feat=POBP, majority_freqs: train=0.462 test=0.458
+feat=RELP, majority_freqs: train=0.479 test=0.476
+feat=SEX, majority_freqs: train=0.534 test=0.535
+feat=RAC1P, majority_freqs: train=0.633 test=0.636
+[adv] naive majority freq guess (adv ACC LB): train_acc=0.475, test_acc=0.474
+
+Running data minimizer: tree
+Final bucketizations:
+================
+Bucketization:
+AGEP (cont): tot_buckets=2, borders=[0.149]
+		Train set values would map to 2 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+SCHL (cont): tot_buckets=1, borders=[]
+		Train set values would map to 1 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+WKHP (cont): tot_buckets=2, borders=[0.352]
+		Train set values would map to 2 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+COW (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0, 0, 0]
+MAR (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0]
+OCCP (disc): tot_buckets=4, mapping=[1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 3, 1, 3, 1, 1, 0, 0, 1, 1, 1, 0, 3, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 3, 2, 1, 3, 3, 3, 3, 0, 1, 2, 3, 3, 3, 3, 1, 0, 0, 0, 1, 2, 1, 1, 3, 2, 0, 0, 2, 2, 0, 3, 0, 3, 1, 2, 2, 3, 3, 3, 1, 1, 0, 1, 0, 2, 3, 2, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 1, 1, 1, 1, 3, 0, 1, 1, 2, 3, 3, 3, 2, 3, 0, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 3, 1, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 3, 2, 3, 2, 3, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2, 2, 2, 2, 1, 0, 0, 3, 0, 0, 2, 0, 1, 2, 2, 1, 0, 2, 2, 3, 2, 2, 3, 2, 3, 1, 2, 0, 2, 3, 3, 2, 3, 2, 2, 2, 2, 3, 0, 2, 3, 2, 3, 3, 3, 3, 3, 2, 0, 0, 0, 0, 2, 2, 3, 3, 3, 2, 2, 3, 2, 2, 2, 2, 3, 3, 3, 0, 2, 2, 0, 2, 2, 0, 1, 3, 2, 2, 3, 2, 2, 0, 2, 0, 0, 2, 2, 3, 2, 2, 3, 3, 3, 1, 0, 2, 0, 0, 1, 2, 1, 0, 2, 2, 3, 1, 3, 0, 3, 3, 3, 2, 3, 0, 1, 3, 2, 3, 3, 0, 3, 2, 2, 3, 3, 0, 0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 2, 0, 0, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2, 2, 3, 3, 0, 1, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 3, 2, 2, 3, 3, 1, 1, 0, 1, 0, 2, 2, 2, 2, 3, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 0, 1, 1, 3, 2, 3, 3, 2, 2, 1, 1, 3, 3, 0, 2, 2, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 1, 0, 2, 2]
+POBP (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+RELP (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+SEX (disc): tot_buckets=1, mapping=[0, 0]
+RAC1P (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0, 0, 0, 0]
+Used 15 buckets in total
+================
+k_anon=349 , l_div=0.034664954990148544, size=16
+Final results:
+----> Evaluating: Training new classifiers and a new adversary on 1-hot buckets (15 fts) - torch.Size([57714, 733]) points
+----> Evaluating: Training classifier 1
+[Trying CLF with wd=1e-06] 0.805 -> 0.799
+[Trying CLF with wd=1e-05] 0.805 -> 0.799
+[Trying CLF with wd=0.0001] 0.805 -> 0.799
+[Trying CLF with wd=0.001] 0.805 -> 0.799
+[Trying CLF with wd=0.002] 0.805 -> 0.799
+[Trying CLF with wd=0.004] 0.805 -> 0.799
+[Trying CLF with wd=0.006] 0.805 -> 0.799
+[Trying CLF with wd=0.008] 0.805 -> 0.799
+[Trying CLF with wd=0.01] 0.805 -> 0.799
+[Trying CLF with wd=0.02] 0.805 -> 0.799
+[Trying CLF with wd=0.05] 0.805 -> 0.799
+Chose 0.05
+[clf] train_acc=0.805, val_acc=0.799, test_acc=0.800
+Adversary uses torch.Size([57714, 733]) points!
+[Trying ADV with wd=1e-06] 0.508 -> 0.509
+[Trying ADV with wd=1e-05] 0.505 -> 0.507
+[Trying ADV with wd=0.0001] 0.504 -> 0.504
+[Trying ADV with wd=0.001] 0.511 -> 0.512
+[Trying ADV with wd=0.002] 0.499 -> 0.500

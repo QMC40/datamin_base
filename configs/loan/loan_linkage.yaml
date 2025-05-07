@@ -1,0 +1,40 @@
+---
+neptune:
+  enable: False
+  api_key: ~
+  run_name: ~
+
+datasets:
+  - dataset: ["loan"]
+    add_syn: False
+    freeze_feature: []
+    sens_feats: "disc"
+    batch_size: 256
+
+evaluations:
+  - classifiers:
+      - clf_1:
+          clf_model: "mlp2"
+          clf_epochs: 20
+          clf_lr: 0.01
+          clf_weight_decay: 0.0
+    adversaries:
+      - adv_linkage:
+          adv_type: "linkage"
+          clf_model: "mlp2"
+          clf_epochs: 20
+          clf_lr: 0.01
+          clf_weight_decay: 0.0
+          linkage_algorithm: "mostlikely"
+          linkage_b_features: [0, 1]   # Change based on features you want to infer
+          linkage_a_features: [2, 3]   # Change based on features you want to match against
+
+minimizers:
+  - minimizer: "uniform"
+    uniform_buckets: [1, 2, 3, 4, 5]
+
+seed: 123
+device: "cpu"
+num_workers: 12
+logger_level: "INFO"
+out_dir: "final_results7/loan_linkage"

@@ -1,0 +1,127 @@
+-------------------------------------CONFIG-------------------------------------
+neptune_config:
+ neptune_run_label: None
+ use_neptune: False
+dataset_config:
+ dataset: loan
+ acs_state: CT
+ acs_year: 2014
+ shift_state: None
+ shift_year: None
+ freeze_feature: []
+ add_syn: False
+ bucketization_percent: 1.0
+ train_percent: 1.0
+ adv_percent: 1.0
+ sens_feats: disc
+ val_split: 0.1
+ test_split: 0.3
+ batch_size: 256
+eval_config:
+Classifiers:
+ Classifier 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+Adversary 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+min_config:
+featsel_k=1,method=anova
+seed: 123
+device: cpu
+out_dir: final_results2/loan
+compute_guarantees: False
+get_clf_upper_bound: False
+fairness_sens_col: None
+num_workers: 12
+logger_level: INFO
+-----------------------------------CONFIG END-----------------------------------
+
+majority class acc (clf ACC LB): train_acc=0.688 test_acc=0.670
+feat=Gender, majority_freqs: train=0.818 test=0.795
+feat=Married, majority_freqs: train=0.655 test=0.643
+feat=Dependents, majority_freqs: train=0.587 test=0.562
+feat=Education, majority_freqs: train=0.799 test=0.719
+feat=Self_Employed, majority_freqs: train=0.848 test=0.827
+feat=Property_Area, majority_freqs: train=0.378 test=0.384
+[adv] naive majority freq guess (adv ACC LB): train_acc=0.681, test_acc=0.655
+
+Running data minimizer: featsel
+Support: [False False False False  True False False False False False False]
+ApplicantIncome dropped
+CoapplicantIncome dropped
+Loan_Amount dropped
+Loan_Amount_Term dropped
+Credit_History kept
+Gender dropped
+Married dropped
+Dependents dropped
+Education dropped
+Self_Employed dropped
+Property_Area dropped
+================
+Bucketization:
+ApplicantIncome (cont): tot_buckets=1, borders=[]
+		Train set values would map to 1 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+CoapplicantIncome (cont): tot_buckets=1, borders=[]
+		Train set values would map to 1 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Loan_Amount (cont): tot_buckets=1, borders=[]
+		Train set values would map to 1 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Loan_Amount_Term (cont): tot_buckets=1, borders=[]
+		Train set values would map to 1 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+Credit_History (cont): tot_buckets=100, borders=[0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4, 0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5, 0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.6, 0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.7, 0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.8, 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99]
+		Train set values would map to 2 buckets: [0, 99]
+Gender (disc): tot_buckets=1, mapping=[0, 0]
+Married (disc): tot_buckets=1, mapping=[0, 0]
+Dependents (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0]
+Education (disc): tot_buckets=1, mapping=[0, 0]
+Self_Employed (disc): tot_buckets=1, mapping=[0, 0]
+Property_Area (disc): tot_buckets=1, mapping=[0, 0, 0]
+Used 110 buckets in total
+================
+k_anon=65 , l_div=0.5324485898017883, size=2
+Final results:
+----> Evaluating: Training new classifiers and a new adversary on 1-hot buckets (110 fts) - torch.Size([368, 22]) points
+----> Evaluating: Training classifier 1
+[Trying CLF with wd=1e-06] 0.766 -> 0.852
+[Trying CLF with wd=1e-05] 0.766 -> 0.852
+[Trying CLF with wd=0.0001] 0.766 -> 0.852
+[Trying CLF with wd=0.001] 0.766 -> 0.852
+[Trying CLF with wd=0.002] 0.766 -> 0.852
+[Trying CLF with wd=0.004] 0.766 -> 0.852
+[Trying CLF with wd=0.006] 0.766 -> 0.852
+[Trying CLF with wd=0.008] 0.766 -> 0.852
+[Trying CLF with wd=0.01] 0.766 -> 0.852
+[Trying CLF with wd=0.02] 0.766 -> 0.852
+[Trying CLF with wd=0.05] 0.688 -> 0.738
+Chose 0.02
+[clf] train_acc=0.766, val_acc=0.852, test_acc=0.805
+Adversary uses torch.Size([368, 22]) points!
+[Trying ADV with wd=1e-06] 0.687 -> 0.669
+[Trying ADV with wd=1e-05] 0.687 -> 0.669
+[Trying ADV with wd=0.0001] 0.687 -> 0.669
+[Trying ADV with wd=0.001] 0.687 -> 0.669
+[Trying ADV with wd=0.002] 0.687 -> 0.669
+[Trying ADV with wd=0.004] 0.685 -> 0.667
+[Trying ADV with wd=0.006] 0.685 -> 0.667
+[Trying ADV with wd=0.008] 0.685 -> 0.667
+[Trying ADV with wd=0.01] 0.685 -> 0.667
+[Trying ADV with wd=0.02] 0.685 -> 0.667
+[Trying ADV with wd=0.05] 0.685 -> 0.667
+Chose 0.002
+[adv test] adv accuracy per feature:
+	feat=Gender: tr= 0.814, va= 0.770, te= 0.795
+	feat=Married: tr= 0.682, va= 0.656, te= 0.643
+	feat=Dependents: tr= 0.565, va= 0.525, te= 0.562
+	feat=Education: tr= 0.803, va= 0.852, te= 0.719
+	feat=Self_Employed: tr= 0.863, va= 0.820, te= 0.827
+	feat=Property_Area: tr= 0.397, va= 0.393, te= 0.389
+[adv] train_acc=0.687, val_acc=0.669, test_acc=0.656
+[ADV Quantile] 0.99: 0.675
+[ADV Quantile] 0.98: 0.675
+[ADV Quantile] 0.95: 0.675
+[ADV Quantile] 0.90: 0.675
+[ADV Quantile] 0.80: 0.672
+[ADV Quantile] 0.50: 0.662
+[ADV Quantile] 0.00: 0.656
+[ADV EXACT] train_acc=31.0/368, val_acc=3.0/61, test_acc=13.0/185
+==================
+{'clf': [(0.7663043400515681, 0.8524590134620667, 0.8054053783416748)], 'adv_recovery-ops': [(0.6871744816501936, 0.6693988939126333, 0.6558558543523153)]}

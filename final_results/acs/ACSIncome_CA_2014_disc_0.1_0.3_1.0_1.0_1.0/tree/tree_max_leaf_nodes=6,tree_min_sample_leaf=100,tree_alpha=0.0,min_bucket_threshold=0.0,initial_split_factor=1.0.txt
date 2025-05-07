@@ -1,0 +1,147 @@
+-------------------------------------CONFIG-------------------------------------
+neptune_config:
+ neptune_run_label: None
+ use_neptune: False
+dataset_config:
+ dataset: ACSIncome
+ acs_state: CA
+ acs_year: 2014
+ shift_state: None
+ shift_year: None
+ freeze_feature: []
+ add_syn: False
+ bucketization_percent: 1.0
+ train_percent: 1.0
+ adv_percent: 1.0
+ sens_feats: disc
+ val_split: 0.1
+ test_split: 0.3
+ batch_size: 256
+eval_config:
+Classifiers:
+ Classifier 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+Adversary 0:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+Adversary 1:
+  Model: mlp2 Epochs: 20 LR: 0.01 WD: 0.0
+min_config:
+tree_max_leaf_nodes=6,tree_min_sample_leaf=100,tree_alpha=0.0,min_bucket_threshold=0.0,initial_split_factor=1.0
+seed: 123
+device: cpu
+out_dir: final_results/acs
+compute_guarantees: False
+get_clf_upper_bound: False
+fairness_sens_col: None
+num_workers: 12
+logger_level: INFO
+-----------------------------------CONFIG END-----------------------------------
+
+majority class acc (clf ACC LB): train_acc=0.643 test_acc=0.651
+feat=COW, majority_freqs: train=0.653 test=0.652
+feat=MAR, majority_freqs: train=0.534 test=0.536
+feat=OCCP, majority_freqs: train=0.032 test=0.030
+feat=POBP, majority_freqs: train=0.462 test=0.458
+feat=RELP, majority_freqs: train=0.479 test=0.476
+feat=SEX, majority_freqs: train=0.534 test=0.535
+feat=RAC1P, majority_freqs: train=0.633 test=0.636
+[adv] naive majority freq guess (adv ACC LB): train_acc=0.475, test_acc=0.474
+
+Running data minimizer: tree
+Final bucketizations:
+================
+Bucketization:
+AGEP (cont): tot_buckets=1, borders=[]
+		Train set values would map to 1 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+SCHL (cont): tot_buckets=1, borders=[]
+		Train set values would map to 1 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+WKHP (cont): tot_buckets=2, borders=[0.352]
+		Train set values would map to 2 buckets: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+COW (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0, 0, 0]
+MAR (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0]
+OCCP (disc): tot_buckets=4, mapping=[1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 3, 1, 3, 1, 1, 0, 0, 1, 1, 1, 1, 3, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 3, 2, 0, 0, 0, 3, 3, 0, 1, 3, 3, 0, 3, 3, 1, 0, 0, 0, 1, 2, 0, 1, 0, 3, 1, 0, 2, 2, 0, 3, 0, 3, 1, 2, 2, 3, 3, 3, 1, 1, 0, 0, 0, 3, 0, 3, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 1, 1, 1, 1, 3, 0, 0, 1, 3, 3, 3, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 3, 0, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 0, 2, 3, 2, 3, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2, 2, 2, 2, 0, 0, 0, 3, 0, 0, 2, 0, 1, 2, 2, 1, 0, 2, 2, 3, 2, 2, 3, 2, 3, 1, 2, 0, 3, 3, 3, 2, 0, 2, 2, 2, 2, 3, 0, 2, 3, 2, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 2, 2, 3, 3, 3, 2, 2, 3, 2, 2, 2, 2, 3, 3, 3, 0, 2, 2, 0, 2, 2, 0, 1, 3, 3, 2, 3, 2, 2, 0, 3, 0, 0, 2, 2, 3, 2, 2, 3, 3, 3, 0, 0, 2, 0, 0, 1, 2, 1, 0, 2, 2, 0, 1, 0, 0, 3, 3, 0, 2, 3, 0, 1, 3, 2, 3, 3, 0, 3, 2, 3, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 2, 2, 2, 2, 0, 0, 2, 1, 3, 2, 2, 2, 2, 2, 3, 2, 3, 1, 2, 2, 3, 0, 0, 1, 2, 3, 3, 2, 2, 3, 2, 2, 2, 0, 2, 2, 2, 2, 2, 3, 2, 2, 3, 0, 1, 1, 0, 1, 0, 2, 2, 2, 2, 3, 2, 3, 2, 3, 3, 2, 3, 2, 2, 2, 2, 2, 0, 1, 1, 3, 2, 3, 3, 2, 2, 1, 1, 3, 3, 1, 2, 2, 1, 2, 0, 1, 3, 3, 2, 2, 2, 2, 2, 0, 2, 2, 1, 0, 2, 3]
+POBP (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+RELP (disc): tot_buckets=2, mapping=[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]
+SEX (disc): tot_buckets=1, mapping=[0, 0]
+RAC1P (disc): tot_buckets=1, mapping=[0, 0, 0, 0, 0, 0, 0, 0, 0]
+Used 15 buckets in total
+================
+k_anon=331 , l_div=0.03495432808995247, size=16
+Final results:
+----> Evaluating: Training new classifiers and a new adversary on 1-hot buckets (15 fts) - torch.Size([57714, 733]) points
+----> Evaluating: Training classifier 1
+[Trying CLF with wd=1e-06] 0.805 -> 0.800
+[Trying CLF with wd=1e-05] 0.805 -> 0.800
+[Trying CLF with wd=0.0001] 0.805 -> 0.800
+[Trying CLF with wd=0.001] 0.805 -> 0.800
+[Trying CLF with wd=0.002] 0.805 -> 0.800
+[Trying CLF with wd=0.004] 0.805 -> 0.800
+[Trying CLF with wd=0.006] 0.805 -> 0.800
+[Trying CLF with wd=0.008] 0.805 -> 0.800
+[Trying CLF with wd=0.01] 0.805 -> 0.800
+[Trying CLF with wd=0.02] 0.804 -> 0.797
+[Trying CLF with wd=0.05] 0.805 -> 0.800
+Chose 0.05
+[clf] train_acc=0.805, val_acc=0.800, test_acc=0.799
+Adversary uses torch.Size([57714, 733]) points!
+[Trying ADV with wd=1e-06] 0.526 -> 0.528
+[Trying ADV with wd=1e-05] 0.522 -> 0.524
+[Trying ADV with wd=0.0001] 0.527 -> 0.528
+[Trying ADV with wd=0.001] 0.527 -> 0.528
+[Trying ADV with wd=0.002] 0.515 -> 0.517
+[Trying ADV with wd=0.004] 0.508 -> 0.510
+[Trying ADV with wd=0.006] 0.527 -> 0.529
+[Trying ADV with wd=0.008] 0.518 -> 0.521
+[Trying ADV with wd=0.01] 0.521 -> 0.523
+[Trying ADV with wd=0.02] 0.499 -> 0.503
+[Trying ADV with wd=0.05] 0.491 -> 0.494
+Chose 0.006
+[adv test] adv accuracy per feature:
+	feat=COW: tr= 0.653, va= 0.657, te= 0.652
+	feat=MAR: tr= 0.684, va= 0.681, te= 0.683
+	feat=OCCP: tr= 0.073, va= 0.074, te= 0.074
+	feat=POBP: tr= 0.463, va= 0.461, te= 0.457
+	feat=RELP: tr= 0.602, va= 0.607, te= 0.599
+	feat=SEX: tr= 0.580, va= 0.577, te= 0.578
+	feat=RAC1P: tr= 0.633, va= 0.643, te= 0.636
+[adv] train_acc=0.527, val_acc=0.529, test_acc=0.526
+[ADV Quantile] 0.99: 0.527
+[ADV Quantile] 0.98: 0.525
+[ADV Quantile] 0.95: 0.527
+[ADV Quantile] 0.90: 0.541
+[ADV Quantile] 0.80: 0.530
+[ADV Quantile] 0.50: 0.531
+[ADV Quantile] 0.00: 0.526
+[ADV EXACT] train_acc=173.0/57714, val_acc=29.0/9619, test_acc=81.0/28857
+Adversary uses torch.Size([57714, 733]) points!
+[Trying ADV with wd=1e-06] 0.504 -> 0.506
+[Trying ADV with wd=1e-05] 0.504 -> 0.506
+[Trying ADV with wd=0.0001] 0.500 -> 0.501
+[Trying ADV with wd=0.001] 0.498 -> 0.500
+[Trying ADV with wd=0.002] 0.505 -> 0.506
+[Trying ADV with wd=0.004] 0.491 -> 0.492
+[Trying ADV with wd=0.006] 0.493 -> 0.494
+[Trying ADV with wd=0.008] 0.497 -> 0.498
+[Trying ADV with wd=0.01] 0.474 -> 0.476
+[Trying ADV with wd=0.02] 0.474 -> 0.477
+[Trying ADV with wd=0.05] 0.472 -> 0.475
+Chose 1e-05
+[adv test] adv accuracy per feature:
+	feat=COW: tr= 0.653, va= 0.657, te= 0.652
+	feat=MAR: tr= 0.646, va= 0.646, te= 0.644
+	feat=OCCP: tr= 0.066, va= 0.065, te= 0.065
+	feat=POBP: tr= 0.463, va= 0.461, te= 0.457
+	feat=RELP: tr= 0.479, va= 0.482, te= 0.476
+	feat=SEX: tr= 0.589, va= 0.589, te= 0.589
+	feat=RAC1P: tr= 0.633, va= 0.643, te= 0.636
+[adv] train_acc=0.504, val_acc=0.506, test_acc=0.503
+[ADV Quantile] 0.99: 0.564
+[ADV Quantile] 0.98: 0.572
+[ADV Quantile] 0.95: 0.564
+[ADV Quantile] 0.90: 0.552
+[ADV Quantile] 0.80: 0.564
+[ADV Quantile] 0.50: 0.535
+[ADV Quantile] 0.00: 0.503
+[ADV EXACT] train_acc=67.0/57714, val_acc=12.0/9619, test_acc=36.0/28857
+==================
+{'clf': [(0.8051425996621367, 0.800395051485437, 0.7992168277503092)], 'adv_recovery-ops': [(0.5267403592554529, 0.5286202591500784, 0.5255691403271124)], 'adv_recovery': [(0.5040647976204056, 0.5061577731897509, 0.50276431209124)]}
